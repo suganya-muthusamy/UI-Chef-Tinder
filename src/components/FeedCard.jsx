@@ -4,8 +4,12 @@ const FeedCard = ({ data }) => {
   const { firstName, lastName, age, skills, photoUrl, about } = data;
   return (
     <div className="card card-compact bg-base-300 w-96 shadow-xl my-5">
-      <figure className="">
-        <img src={photoUrl} alt="user" className="rounded" />
+      <figure className="h-64 w-full">
+        <img
+          src={photoUrl}
+          alt="user"
+          className="rounded w-full h-full object-cover"
+        />
       </figure>
       <div className="card-body flex flex-col items-center">
         <h2 className="card-title">
