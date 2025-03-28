@@ -3,21 +3,22 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { removeUser } from "../redux/userSlice";
+import { BASE_URL } from "../utils/constant";
 
 const Navbar = () => {
   const user = useSelector((store) => store?.user);
-  console.log(user);
+  // console.log(user);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const hanldeLogout = async () => {
     try {
       const data = await axios.post(
-        "http://localhost:3000/logout",
+        BASE_URL + "/logout",
         {},
         { withCredentials: true }
       );
-      console.log(data);
+      // console.log(data);
       dispatch(removeUser());
       return navigate("/login");
     } catch (err) {
@@ -28,7 +29,7 @@ const Navbar = () => {
   return (
     <div className="navbar bg-base-300">
       <div className="flex-1">
-        <Link to={"/"} className="btn btn-ghost text-xl">
+        <Link to={"/feed"} className="btn btn-ghost text-xl">
           Chef Tinder
         </Link>
       </div>

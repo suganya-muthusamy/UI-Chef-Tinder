@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
+import { BASE_URL } from "../utils/constant";
 
 const Signup = () => {
   const [firstName, setFirstName] = useState("");
@@ -22,7 +23,7 @@ const Signup = () => {
   };
   const handleSignup = async () => {
     try {
-      const data = await axios.post("http://localhost:3000/signup", {
+      const data = await axios.post(BASE_URL + "/signup", {
         firstName,
         lastName,
         emailId,
@@ -53,7 +54,7 @@ const Signup = () => {
   return (
     <>
       <Navbar />
-      <div className="flex justify-center items-center my-20">
+      <div className="flex flex-col justify-center items-center my-20">
         <fieldset className="fieldset w-4/12 bg-base-200 border border-base-300 p-4 rounded-box">
           <legend className="fieldset-legend">Sign Up</legend>
           <input
@@ -133,6 +134,12 @@ const Signup = () => {
             <span>{toast}</span>
           </div>
         </fieldset>
+        <p className="mt-5">
+          Already Registered?{" "}
+          <Link to={"/login"} className="mx-3">
+            Login!
+          </Link>
+        </p>
       </div>
     </>
   );

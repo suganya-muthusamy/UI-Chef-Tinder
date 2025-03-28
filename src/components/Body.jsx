@@ -4,6 +4,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { addUser } from "../redux/userSlice";
+import { BASE_URL } from "../utils/constant";
 
 const Body = () => {
   const dispatch = useDispatch();
@@ -13,7 +14,7 @@ const Body = () => {
   const fetchUser = async () => {
     if (user) return;
     try {
-      const user = await axios.get("http://localhost:3000/profile", {
+      const user = await axios.get(BASE_URL + "/profile", {
         withCredentials: true,
       });
       console.log(user.data);

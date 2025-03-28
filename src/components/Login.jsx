@@ -1,21 +1,25 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../redux/userSlice";
 import { Link, useNavigate } from "react-router-dom";
+import { BASE_URL } from "../utils/constant";
 
 const Login = () => {
-  const [email, setEmail] = useState("muthu@gmail.com");
-  const [password, setPassword] = useState("Muthu@123");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+
+  const user = useSelector((store) => store.user);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleLogin = async () => {
+    if (user) return;
     try {
       const data = await axios.post(
-        "http://localhost:3000/login",
+        BASE_URL + "/login",
         {
           emailId: email,
           password,
@@ -35,7 +39,7 @@ const Login = () => {
   };
 
   return (
-    <div className="flex justify-center items-center my-20">
+    <div className="flex flex-col justify-center items-center my-20">
       <fieldset className="fieldset w-4/12 bg-base-200 border border-base-300 p-4 rounded-box">
         <legend className="fieldset-legend text-xl">Login</legend>
 
@@ -60,8 +64,11 @@ const Login = () => {
           </button>
         </div>
       </fieldset>
-      <p>
-        New User? <Link to={"/signup"}>Sign Up!</Link>
+      <p className="mt-5">
+        New User?{" "}
+        <Link to={"/signup"} className="mx-3">
+          Sign Up!
+        </Link>
       </p>
     </div>
   );
