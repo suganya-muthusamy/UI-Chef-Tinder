@@ -3,49 +3,43 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import { BASE_URL } from "../utils/constant";
+import { useDispatch, useSelector } from "react-redux";
+import { addUser } from "../redux/userSlice";
 
 const Signup = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [emailId, setEmailId] = useState("");
   const [password, setPassword] = useState("");
-  const [age, setAge] = useState(null);
-  const [gender, setGender] = useState("");
-  // const[photoUrl, setPhotoUrl]=useState("")
-  // const[skills, setSkills]=useState([])
 
-  const [toast, settoast] = useState("");
+  const user = useSelector((store) => store.user);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const showToast = (data) => {
-    settoast(data.data);
-  };
   const handleSignup = async () => {
+    if (user) {
+      return navigate("/feed");
+    }
     try {
-      const data = await axios.post(BASE_URL + "/signup", {
-        firstName,
-        lastName,
-        emailId,
-        password,
-        age,
-        gender,
-      });
-      console.log(data);
-      if (data) {
-        showToast(data);
-        setTimeout(() => {
-          navigate("/login");
-        }, 3000);
+      const data = await axios.post(
+        BASE_URL + "/signup",
+        {
+          firstName,
+          lastName,
+          emailId,
+          password,
+        },
+        { withCredentials: true }
+      );
+      console.log("signup", data);
+      if (data.status === 200) {
+        dispatch(addUser(data.data.data));
+        return navigate("/profile");
+      } else {
+        console.log("Invalid signup credentials");
+        return; // Prevent navigation if there's an error
       }
-
-      // Reset form fields
-      setFirstName("");
-      setLastName("");
-      setEmailId("");
-      setPassword("");
-      setAge(0);
-      setGender("");
     } catch (error) {
       console.log(error);
     }
@@ -53,7 +47,6 @@ const Signup = () => {
 
   return (
     <>
-      <Navbar />
       <div className="flex flex-col justify-center items-center my-20">
         <fieldset className="fieldset w-4/12 bg-base-200 border border-base-300 p-4 rounded-box">
           <legend className="fieldset-legend">Sign Up</legend>
@@ -86,53 +79,10 @@ const Signup = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <input
-            type="number"
-            className="input mb-3 w-full"
-            placeholder="Age"
-            value={age}
-            onChange={(e) => setAge(e.target.value)}
-          />
-
-          <div className="flex gap-4">
-            <label>
-              <input
-                type="radio"
-                name="gender"
-                value="Male"
-                checked={gender === "Male"}
-                onChange={(e) => setGender(e.target.value)}
-              />
-              Male
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="gender"
-                value="Female"
-                checked={gender === "Female"}
-                onChange={(e) => setGender(e.target.value)}
-              />
-              Female
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="gender"
-                value="Others"
-                checked={gender === "Others"}
-                onChange={(e) => setGender(e.target.value)}
-              />
-              Others
-            </label>
-          </div>
 
           <button onClick={handleSignup} className="btn btn-neutral mt-4">
             Sign Up
           </button>
-          <div>
-            <span>{toast}</span>
-          </div>
         </fieldset>
         <p className="mt-5">
           Already Registered?{" "}

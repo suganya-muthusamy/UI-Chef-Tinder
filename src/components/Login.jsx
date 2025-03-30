@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../redux/userSlice";
 import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constant";
-
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -28,13 +27,13 @@ const Login = () => {
       );
       if (data.status === 200) {
         dispatch(addUser(data.data));
-        navigate("/feed");
+        return navigate("/feed");
       } else {
         console.log("Invalid login credentials");
         return; // Prevent navigation if there's an error
       }
     } catch (error) {
-      setMessage(error.response.data);
+      setMessage(error);
     }
   };
 

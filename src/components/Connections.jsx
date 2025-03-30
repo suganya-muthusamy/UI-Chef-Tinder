@@ -11,7 +11,7 @@ const Connections = () => {
   const dispatch = useDispatch();
 
   const fetchConnections = async () => {
-    if (connections) return;
+    if (connections > 0) return;
     try {
       const res = await axios.get(BASE_URL + "/user/connections", {
         withCredentials: true,
@@ -31,12 +31,12 @@ const Connections = () => {
       <div className="mx-auto">
         <h1 className="text-xl  mb-4">My Connections</h1>
 
-        {connections &&
+        {connections.length > 0 &&
           connections.map((connection) => {
             return (
               <Link
                 to={`/profile/${connection._id}`}
-                className="flex justify-center items-center my-2 bg-gray-700 p-2 shadow-sm rounded-sm"
+                className="flex items-center my-2 bg-gray-700 p-2 shadow-sm rounded-sm"
               >
                 <div>
                   <img

@@ -1,13 +1,13 @@
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { BASE_URL } from "../utils/constant";
-import { addRequests } from "../redux/requestSlice";
+import { addRequests, removeRequest } from "../redux/requestSlice";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const ConnectionRequests = () => {
   const requests = useSelector((store) => store.request);
-  console.log("--------", requests);
+  console.log("--------", requests, "--------");
   const dispatch = useDispatch();
 
   const fetchRequests = async () => {
@@ -16,7 +16,8 @@ const ConnectionRequests = () => {
       const res = await axios.get(BASE_URL + "/user/request/received", {
         withCredentials: true,
       });
-      dispatch(addRequests(res?.data));
+      console.log("all requests", res);
+      dispatch(addRequests(res?.data?.data));
     } catch (error) {
       console.log(error);
     }
@@ -33,7 +34,8 @@ const ConnectionRequests = () => {
         {},
         { withCredentials: true }
       );
-      fetchRequests();
+      console.log("review", res);
+      dispatch(removeRequest(id));
     } catch (error) {
       console.log(error);
     }
@@ -50,8 +52,8 @@ const ConnectionRequests = () => {
     <div className="flex my-10">
       <div className="mx-auto">
         <h1 className="text-xl mb-4 font-bold">Connection Requests</h1>
-        {requests?.data?.length > 0 &&
-          requests?.data?.map((request) => {
+        {requests?.length > 0 &&
+          requests?.map((request) => {
             return (
               <div
                 key={request._id}

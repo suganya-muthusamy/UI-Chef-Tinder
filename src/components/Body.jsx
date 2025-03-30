@@ -19,6 +19,7 @@ const Body = () => {
       });
       console.log(user.data);
       dispatch(addUser(user.data));
+      // navigate("/feed");
     } catch (err) {
       console.log(err);
       if (err.status === 401) {

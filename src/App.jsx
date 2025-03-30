@@ -30,8 +30,8 @@ function App() {
               path="/connection-requests"
               element={<ConnectionRequests />}
             />
+            <Route path="/signup" element={<Signup />} />
           </Route>
-          <Route path="/signup" element={<Signup />} />
         </Routes>
       </BrowserRouter>
     </Provider>

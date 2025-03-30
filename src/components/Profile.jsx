@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 const Profile = () => {
   const user = useSelector((store) => store?.user);
   const [showEdit, setShowEdit] = useState(false);
-  console.log(user);
   return (
     <>
       <div className="flex  items-center my-20  py-20 px-10 bg-base-200 border-base-100 w-8/12 mx-auto">

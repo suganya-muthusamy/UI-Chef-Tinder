@@ -2,10 +2,14 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const connectionSlice = createSlice({
   name: "connection",
-  initialState: null,
+  initialState: JSON.parse(localStorage.getItem("connections")) || [],
   reducers: {
-    addConnection: (state, action) => action.payload,
-    removeConnection: (state, action) => null,
+    addConnection: (state, action) => {
+      const updatedState = action.payload;
+      localStorage.setItem("connections", JSON.stringify(updatedState)); // Persist to localStorage
+      return updatedState;
+    },
+    removeConnection: (state, action) => [],
   },
 });
 

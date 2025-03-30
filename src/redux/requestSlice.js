@@ -2,22 +2,18 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const requestSlice = createSlice({
   name: "request",
-  initialState: [], // Fix: Set initial state as an empty array
+  initialState: JSON.parse(localStorage.getItem("requests")) || [], // Fix: Set initial state as an empty array
 
   reducers: {
     addRequests: (state, action) => {
-      console.log("adding states", state);
-      return action.payload;
+      const updatedState = action.payload;
+      localStorage.setItem("requests", JSON.stringify(updatedState)); // Persist to localStorage
+      return updatedState; // Update state with the new requests
     },
 
     removeRequest: (state, action) => {
-      console.log("State before:", JSON.stringify(state, null, 2)); // Stringify the state for better inspection
-      // const newState = [state];
-
-      const updatedState = state?.data?.filter(
-        (request) => request._id !== action.payload
-      );
-      return updatedState;
+      console.log("removing states", state);
+      return state.filter((request) => request._id !== action.payload);
     },
   },
 });

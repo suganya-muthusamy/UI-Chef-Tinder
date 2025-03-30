@@ -7,7 +7,10 @@ import { BASE_URL } from "../utils/constant";
 
 const Navbar = () => {
   const user = useSelector((store) => store?.user);
-  // console.log(user);
+  const connections = useSelector((store) => store?.connection) || [];
+  const connectionsRequest = useSelector((store) => store?.request) || [];
+
+  console.log(connections, "connections in navbar");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -69,10 +72,18 @@ const Navbar = () => {
                 </Link>
               </li>
               <li>
-                <Link to={"/connections"}>Connections</Link>
+                <Link to={"/connections"}>
+                  Connections
+                  <span className="badge">{connections.length}</span>
+                </Link>
               </li>
               <li>
-                <Link to={"/connection-requests"}>Connection Requests</Link>
+                <Link to={"/connection-requests"}>
+                  Connection Requests{" "}
+                  <span className="badge">
+                    {connectionsRequest && connectionsRequest.length}
+                  </span>
+                </Link>
               </li>
               <li onClick={hanldeLogout}>
                 <a>Logout</a>
