@@ -3,12 +3,12 @@ import React from "react";
 const FeedCard = ({ data }) => {
   const { firstName, lastName, age, skills, photoUrl, about } = data;
   return (
-    <div className="card card-compact bg-base-300 w-96 shadow-xl my-5">
-      <figure className="h-64 w-full">
+    <div className="card card-compact bg-base-300 w-80 shadow-xl my-5">
+      <figure className="h-92 1-80 w-full">
         <img
           src={photoUrl}
           alt="user"
-          className="rounded w-full h-full object-cover"
+          className="rounded object-cover h-92 w-80"
         />
       </figure>
       <div className="card-body flex flex-col items-center">

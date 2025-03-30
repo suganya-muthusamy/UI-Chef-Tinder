@@ -11,6 +11,7 @@ import Homepage from "./components/Homepage";
 import Connections from "./components/Connections";
 import ConnectionProfile from "./components/ConnectionProfile";
 import ConnectionRequests from "./components/ConnectionRequests";
+import RequestProfile from "./components/RequestProfile";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <Route path="/feed" element={<Feed />} />
             <Route path="/connections" element={<Connections />} />
             <Route path="/profile/:userId" element={<ConnectionProfile />} />
+            <Route path="/connection/:userId" element={<RequestProfile />} />
             <Route
               path="/connection-requests"
               element={<ConnectionRequests />}
