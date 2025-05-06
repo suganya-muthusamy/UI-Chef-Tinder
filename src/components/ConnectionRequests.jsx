@@ -57,17 +57,17 @@ const ConnectionRequests = () => {
             return (
               <div
                 key={request._id}
-                className="flex my-4 p-4 bg-gray-700 rounded relative"
+                className="flex flex-shrink-0 my-4 p-4 bg-gray-700 rounded relative"
               >
                 <div>
                   <Link to={`/connection/${request.fromUserId._id}`}>
                     <img
                       src={request.fromUserId.photoUrl}
                       alt="user"
-                      className="w-20 h-20 mb-5 object-cover rounded-full"
+                      className="w-14 h-14 sm:w-20 sm:h-20 mb-5 object-cover rounded-full transition-all duration-300"
                     />
                   </Link>
-                  <p className="absolute bottom-1 text-xs">
+                  <p className="absolute bottom-1 text-xs mb-2 ">
                     Received on {""}
                     {new Date(request.updatedAt).toLocaleDateString("en-US", {
                       month: "short",
@@ -76,7 +76,7 @@ const ConnectionRequests = () => {
                     })}
                   </p>
                 </div>
-                <div className="mx-5">
+                <div className="mx-5 mb-5">
                   <Link
                     to={`/connection/${request.fromUserId._id}`}
                     className="font-semibold"
@@ -86,13 +86,13 @@ const ConnectionRequests = () => {
                   <div>
                     <button
                       onClick={() => reviewRequest("accepted", request._id)}
-                      className="btn btn-primary mt-2 "
+                      className="px-4 py-2 rounded bg-primary text-black mt-2 "
                     >
                       Accept
                     </button>
                     <button
                       onClick={() => reviewRequest("rejected", request._id)}
-                      className="btn btn-secondary mt-2 mx-4"
+                      className="px-4 py-2 rounded bg-secondary text-black mt-2 mx-2 sm:mx-4"
                     >
                       Reject
                     </button>

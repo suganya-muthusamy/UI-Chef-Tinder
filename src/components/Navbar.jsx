@@ -7,10 +7,10 @@ import { BASE_URL } from "../utils/constant";
 
 const Navbar = () => {
   const user = useSelector((store) => store?.user);
-  const connections = useSelector((store) => store?.connection) || [];
-  const connectionsRequest = useSelector((store) => store?.request) || [];
+  // const connections = useSelector((store) => store?.connection) || [];
+  // const connectionsRequest = useSelector((store) => store?.request) || [];
 
-  console.log(connections, "connections in navbar");
+  // console.log(connections, "connections in navbar");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -30,7 +30,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="navbar bg-base-300 sticky top-0 z-50 shadow-lg px-10">
+    <div className="navbar bg-base-300 sticky top-0 z-50 shadow-lg px-0 md:px-10">
       <div className="flex-1">
         <Link to={"/feed"} className="btn btn-ghost text-xl">
           Chef Tinder
@@ -46,7 +46,7 @@ const Navbar = () => {
         </div> */}
         {user && (
           <div className="dropdown dropdown-end">
-            <div className="flex items-center">
+            <div className="flex justify between items-center">
               <p className="mr-5">Welcome {user.firstName}!</p>
               <div
                 tabIndex={0}
@@ -74,15 +74,15 @@ const Navbar = () => {
               <li>
                 <Link to={"/connections"}>
                   Connections
-                  <span className="badge">{connections.length}</span>
+                  {/* <span className="badge">{connections.length}</span> */}
                 </Link>
               </li>
               <li>
                 <Link to={"/connection-requests"}>
                   Connection Requests{" "}
-                  <span className="badge">
+                  {/* <span className="badge">
                     {connectionsRequest && connectionsRequest.length}
-                  </span>
+                  </span> */}
                 </Link>
               </li>
               <li onClick={hanldeLogout}>

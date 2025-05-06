@@ -36,20 +36,22 @@ const Connections = () => {
             return (
               <Link
                 to={`/profile/${connection._id}`}
-                className="flex items-center my-2 bg-gray-700 p-2 shadow-sm rounded-sm"
+                className="flex items-center w-[calc(100vw-20px)] sm:w-full my-2 bg-gray-700 p-2 shadow-sm rounded-sm"
               >
-                <div>
+                <div className="flex-shrink-0">
                   <img
                     src={connection.photoUrl}
                     alt="connection-user"
-                    className="w-20 h-20 object- rounded-full"
+                    className="w-12 h-12 sm:w-20 sm:h-20 object-cover rounded-full transition-all duration-300"
                   />
                 </div>
-                <div className="mx-4">
-                  <h1 className="font-bold text-xl">
+                <div className="ml-4 overflow-hidden">
+                  <h1 className="font-bold text-base sm:text-xl truncate">
                     {connection.firstName} {connection.lastName}
                   </h1>
-                  <p className="text-gray-500">{connection.about}</p>
+                  <p className="text-gray-400 text-sm sm:text-base truncate">
+                    {connection.about}
+                  </p>
                 </div>
               </Link>
             );

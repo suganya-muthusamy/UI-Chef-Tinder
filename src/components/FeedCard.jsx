@@ -22,7 +22,7 @@ const FeedCard = ({ data }) => {
   };
 
   return (
-    <div className="card card-compact bg-base-300 w-80 shadow-xl my-5">
+    <div className="card card-compact bg-base-300 w-72 sm:w-80 shadow-xl my-5">
       <figure className="h-92 1-80 w-full">
         <img
           src={photoUrl}

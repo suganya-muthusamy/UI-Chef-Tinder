@@ -6,29 +6,31 @@ const Profile = () => {
   const user = useSelector((store) => store?.user);
   const [showEdit, setShowEdit] = useState(false);
   return (
-    <>
-      <div className="flex  items-center my-20  py-20 px-10 bg-base-200 border-base-100 w-8/12 mx-auto">
-        <div className="ml-10 mr-20">
+    <div className="flex justify-center">
+      <div className="flex flex-col justify-between items-center md:flex-row my-20 py-10 px-5 sm:py-20 sm:px-10 bg-base-200 border-base-100 w-[calc(100vw-30px)] md:w-8/12 ">
+        <div className="flex flex-shrink-0 flex-col w-full md:w-5/12 items-center justify-center ">
           <img
             src={user?.photoUrl}
             alt={`${user?.firstName} ${user?.lastName}`}
-            className="w-60 h-60 rounded-full object-cover mb-4"
+            className="h-44 w-44 lg:w-60 lg:h-60 rounded-full object-cover mb-4 transition duration-300 "
           />
-          <p className="text-gray-600 mt-4">{user?.about}</p>
+          <div className="flex items-center justify-between w-full">
+            <p className="text-gray-600 mt-4">{user?.about}</p>
 
-          <div className="ml-auto mt-10">
-            <button
-              onClick={() => {
-                setShowEdit(true);
-                console.log("showEdit value:", true);
-              }}
-              className="btn btn-accent"
-            >
-              Edit Profile
-            </button>
+            <div className="">
+              <button
+                onClick={() => {
+                  setShowEdit(true);
+                  console.log("showEdit value:", true);
+                }}
+                className="btn btn-accent"
+              >
+                Edit
+              </button>
+            </div>
           </div>
         </div>
-        <div className=" mb-10">
+        <div className="mt-10 md:mt-0 mb-10 w-full md:w-6/12">
           <h1 className="text-3xl font-bold">
             {user?.firstName} {user?.lastName}
           </h1>
@@ -40,7 +42,7 @@ const Profile = () => {
         </div>
       </div>
       {showEdit && <EditProfile user={user} setShowEdit={setShowEdit} />}
-    </>
+    </div>
   );
 };
 
