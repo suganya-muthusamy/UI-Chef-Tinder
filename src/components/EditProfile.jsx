@@ -6,13 +6,13 @@ import { addUser } from "../redux/userSlice";
 import { useNavigate } from "react-router-dom";
 
 const EditProfile = ({ user, setShowEdit }) => {
-  const [firstName, setFirstName] = useState(user.firstName);
-  const [lastName, setLastName] = useState(user.lastName);
-  const [age, setAge] = useState(user.age);
-  const [skills, setSkills] = useState(user.skills);
-  const [gender, setGender] = useState(user.gender);
-  const [photoUrl, setPhotoUrl] = useState(user.photoUrl);
-  const [about, setAbout] = useState(user.about);
+  const [firstName, setFirstName] = useState(user?.data?.firstName);
+  const [lastName, setLastName] = useState(user?.data?.lastName);
+  const [age, setAge] = useState(user?.data?.age);
+  const [skills, setSkills] = useState(user?.data?.skills);
+  const [gender, setGender] = useState(user?.data?.gender);
+  const [photoUrl, setPhotoUrl] = useState(user?.data?.photoUrl);
+  const [about, setAbout] = useState(user?.data?.about);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -34,7 +34,7 @@ const EditProfile = ({ user, setShowEdit }) => {
       );
 
       console.log(res);
-      dispatch(addUser(res?.data?.data));
+      dispatch(addUser(res?.data));
       setShowEdit(false);
       return navigate("/profile");
     } catch (error) {

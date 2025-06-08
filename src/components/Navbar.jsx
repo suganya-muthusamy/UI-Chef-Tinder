@@ -6,7 +6,9 @@ import { removeUser } from "../redux/userSlice";
 import { BASE_URL } from "../utils/constant";
 
 const Navbar = () => {
-  const user = useSelector((store) => store?.user);
+  // const user = useSelector((store) => store?.user);
+  const user = JSON.parse(localStorage.getItem("user"));
+
   // const connections = useSelector((store) => store?.connection) || [];
   // const connectionsRequest = useSelector((store) => store?.request) || [];
 
@@ -47,7 +49,7 @@ const Navbar = () => {
         {user && (
           <div className="dropdown dropdown-end">
             <div className="flex justify between items-center">
-              <p className="mr-5">Welcome {user?.firstName}!</p>
+              <p className="mr-5">Welcome {user?.data?.firstName}!</p>
               <div
                 tabIndex={0}
                 role="button"
@@ -56,7 +58,7 @@ const Navbar = () => {
                 <div className="w-10 rounded-full">
                   <img
                     alt="Tailwind CSS Navbar component"
-                    src={user?.photoUrl}
+                    src={user?.data?.photoUrl}
                   />
                 </div>
               </div>
