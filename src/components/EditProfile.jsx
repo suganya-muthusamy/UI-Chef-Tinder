@@ -6,7 +6,6 @@ import { addUser } from "../redux/userSlice";
 import { useNavigate } from "react-router-dom";
 
 const EditProfile = ({ user, setShowEdit }) => {
-  console.log(setShowEdit);
   const [firstName, setFirstName] = useState(user.firstName);
   const [lastName, setLastName] = useState(user.lastName);
   const [age, setAge] = useState(user.age);
@@ -42,6 +41,7 @@ const EditProfile = ({ user, setShowEdit }) => {
       console.log(error.message);
     }
   };
+  if (!user) return <p>Loading...</p>;
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50">

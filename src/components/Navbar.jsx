@@ -10,7 +10,7 @@ const Navbar = () => {
   // const connections = useSelector((store) => store?.connection) || [];
   // const connectionsRequest = useSelector((store) => store?.request) || [];
 
-  // console.log(connections, "connections in navbar");
+  console.log(user, "connections in navbar");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -47,7 +47,7 @@ const Navbar = () => {
         {user && (
           <div className="dropdown dropdown-end">
             <div className="flex justify between items-center">
-              <p className="mr-5">Welcome {user.firstName}!</p>
+              <p className="mr-5">Welcome {user?.firstName}!</p>
               <div
                 tabIndex={0}
                 role="button"
@@ -56,7 +56,7 @@ const Navbar = () => {
                 <div className="w-10 rounded-full">
                   <img
                     alt="Tailwind CSS Navbar component"
-                    src={user.photoUrl}
+                    src={user?.photoUrl}
                   />
                 </div>
               </div>

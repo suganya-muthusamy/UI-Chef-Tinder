@@ -11,6 +11,7 @@ const Body = () => {
   const navigate = useNavigate();
 
   const user = useSelector((store) => store.user);
+  console.log("user", user);
   const fetchUser = async () => {
     if (user) return;
     try {
